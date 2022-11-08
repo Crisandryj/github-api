@@ -1,6 +1,9 @@
 class StaticPagesController < ApplicationController
 
   def index
-    client = Octokit::Client.new(:access_token => ENV["pusher_key"])
+    if params[:user] != nil
+    client = Octokit::Client.new(:access_token => params[:user])
+    @client = client.user[:login]
+    end
   end
 end
